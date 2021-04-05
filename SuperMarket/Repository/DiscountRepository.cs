@@ -11,8 +11,7 @@ namespace SuperMarket.Repository
 
         public double ApplyDiscount(int customerId, double totalPrice)
         {
-           
-            if (CustomerType.platinumCustomers.Contains(customerId) )
+            if (CustomerType.platinumCustomers.Contains(customerId))
             {
                 return totalPrice - (totalPrice * DiscountRatesConstants.discountPercent1 / DiscountRatesConstants.TotalPercentage);
             }
@@ -23,10 +22,6 @@ namespace SuperMarket.Repository
             else if (CustomerType.silverCustomers.Contains(customerId))
             {
                 return totalPrice - (totalPrice * DiscountRatesConstants.discountPercent3 / DiscountRatesConstants.TotalPercentage);
-            }
-            else if(!CustomerType.platinumCustomers.Contains(customerId) && CustomerType.goldCustomers.Contains(customerId) && CustomerType.silverCustomers.Contains(customerId))
-            {
-                return totalPrice;
             }
             return totalPrice;
         }
