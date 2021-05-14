@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/SuperMarketWebApiapi/apis/SuperMarketWebApi",
+      "type": "apis.azure"
+    },
+    "appInsights1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/SuperMarketWebApi",
+      "type": "appInsights.azure",
+      "connectionId": "APPINSIGHTS_CONNECTIONSTRING",
+      "secretStore": "AzureAppSettings"
+    },
+    "storage1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/supermarketwebapistorage",
+      "type": "storage.azure",
+      "connectionId": "servicebus/AzureBlobStorage",
+      "secretStore": "AzureAppSettings"
+    },
+    "redis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Cache/Redis/SuperMarketWebApicache",
+      "type": "redis.azure",
+      "connectionId": "CacheConnection",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
