@@ -17,9 +17,9 @@ namespace ServiceBusTopic.Product
                 {
                     services.AddHostedService<Worker>();
                     services.AddSingleton<ISubscriptionClient>(serviceProvider => new SubscriptionClient(
-                    connectionString: "Endpoint=sb://bussupermarket.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=6rCFIU3GxSzmwE8NPfq/+extOnQiytzBAmPrQTvnRfo=",
+                    connectionString: "Endpoint=sb://supermarket.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=dEK+q1xyVD8CbF6SYBlFp6vjbqUph0hXXSojxom4J30=",
                     topicPath: "my-topic", 
-                    subscriptionName: "mytopicsubs"));
+                    subscriptionName: "Azure Pass - Sponsorship"));
                 });
     }
 }
