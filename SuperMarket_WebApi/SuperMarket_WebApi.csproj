@@ -3,9 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>33847932-6860-4e4c-95d8-caefc78e8e4f</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/ce73bbcb-5193-4b9c-ab72-8f2b21331c50/resourceGroups/SuperMarketWebApi20210516143511ResourceGroup/providers/microsoft.insights/components/SuperMarketWebApi</ApplicationInsightsResourceId>
+
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.2.2" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.8.3" />
     <PackageReference Include="Azure.Storage.Files.Shares" Version="12.6.1" />
     <PackageReference Include="Azure.Storage.Queues" Version="12.6.1" />
@@ -13,7 +17,7 @@
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="5.1.3" />
     <PackageReference Include="Microsoft.Extensions.Azure" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

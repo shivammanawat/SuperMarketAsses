@@ -40,22 +40,25 @@ namespace SuperMarket_WebApi
             services.AddSingleton<IDiscountService, DiscountService>();
             services.AddSingleton<ILogger, Logger>();
 
-            // services.AddSingleton<ITopicClient>(serviceProvider => new TopicClient(connectionString: Configuration.GetValue<string>("servicebus:connectionstring"), entityPath: Configuration.GetValue<string>("serviceBus:topicname")));
-            // services.AddSingleton<IMessagePublisher, MessagePublisher>();
 
-            //services.AddScoped<IFileManager, FileManager>();
+            services.AddSingleton<ITopicClient>(serviceProvider => new TopicClient(connectionString: Configuration.GetValue<string>("servicebus:connectionstring"), entityPath: Configuration.GetValue<string>("serviceBus:topicname")));
+            services.AddSingleton<IMessagePublisher, MessagePublisher>();
 
-            //services.AddScoped(_ =>
-            //{
-            //    return new BlobServiceClient(Configuration.GetSection("servicebus").GetSection("AzureBlobStorage").Value);
-            //});
+            services.AddScoped<IFileManager, FileManager>();
 
-          
-            services.AddControllers();
-            services.AddSwaggerGen(c=>
+            services.AddScoped(_ =>
             {
-                c.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
+                return new BlobServiceClient(Configuration.GetSection("servicebus").GetSection("AzureBlobStorage").Value);
             });
+
+
+
+            services.AddControllers();
+
+
+            services.AddSwaggerGen();
+
+
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
             services.AddAzureClients(builder =>
             {
@@ -66,16 +69,14 @@ namespace SuperMarket_WebApi
             {
                 option.Configuration = Configuration["ConnectionStrings:CacheConnection"];
             });
-            //services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
-            //services.AddDistributedRedisCache(option =>
-            //{
-            //    option.Configuration = Configuration["ConnectionStrings:CacheConnection"];
-            //});
-            //services.AddAzureClients(builder =>
-            //{
-            //    builder.AddBlobServiceClient(Configuration["ConnectionStrings:servicebus/AzureBlobStorage:blob"], preferMsi: true);
-            //    builder.AddQueueServiceClient(Configuration["ConnectionStrings:servicebus/AzureBlobStorage:queue"], preferMsi: true);
-            //});
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = Configuration["ConnectionStrings:CacheConnection"];
+            });
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = Configuration["ConnectionStrings:CacheConnection"];
+            });
 
 
         }
@@ -87,9 +88,15 @@ namespace SuperMarket_WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+           
             }
 
             app.UseHttpsRedirection();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
 
@@ -97,17 +104,14 @@ namespace SuperMarket_WebApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                //c.RoutePrefix = string.Empty;
+                c.RoutePrefix = string.Empty;
             });
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+         
          
         }
 
