@@ -78,12 +78,12 @@ namespace SuperMarket_WebApi
                 option.Configuration = Configuration["ConnectionStrings:CacheConnection"];
             });
 
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
 
             if (env.IsDevelopment())
             {
@@ -93,10 +93,7 @@ namespace SuperMarket_WebApi
 
             app.UseHttpsRedirection();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+           
 
             app.UseSwagger();
 
@@ -111,8 +108,13 @@ namespace SuperMarket_WebApi
 
             app.UseAuthorization();
 
-         
-         
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+
         }
 
     }
